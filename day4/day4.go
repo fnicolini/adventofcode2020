@@ -114,12 +114,12 @@ func puzzle2() {
 			}
 
 			// Height
-			if strings.Contains(passportFields["hgt"], "in") {
+			if strings.HasSuffix(passportFields["hgt"], "in") {
 				hgt, _ := strconv.Atoi(passportFields["hgt"][:len(passportFields["hgt"])-2])
 				if hgt >= 59 && hgt <= 76 {
 					passportFieldsConstraints["hgt"] = true
 				}
-			} else if strings.Contains(passportFields["hgt"], "cm") {
+			} else if strings.HasSuffix(passportFields["hgt"], "cm") {
 				hgt, _ := strconv.Atoi(passportFields["hgt"][:len(passportFields["hgt"])-2])
 				if hgt >= 150 && hgt <= 193 {
 					passportFieldsConstraints["hgt"] = true
@@ -127,7 +127,7 @@ func puzzle2() {
 			}
 
 			//Hair color
-			validHairColor := regexp.MustCompile(`#[a-z0-9]{6}`)
+			validHairColor := regexp.MustCompile(`^#[a-f0-9]{6}$`)
 			if validHairColor.MatchString(passportFields["hcl"]) {
 				passportFieldsConstraints["hcl"] = true
 			}
@@ -144,7 +144,7 @@ func puzzle2() {
 			}
 
 			//Passport ID
-			validPassportID := regexp.MustCompile(`[0-9]{9}`)
+			validPassportID := regexp.MustCompile(`^[0-9]{9}$`)
 			if validPassportID.MatchString(passportFields["pid"]) {
 				passportFieldsConstraints["pid"] = true
 			}
