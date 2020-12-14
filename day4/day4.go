@@ -24,6 +24,10 @@ func puzzle1() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Remove last newline if present
+	if rune(content[len(content)-1]) == '\n' {
+		content = content[:len(content)-1]
+	}
 
 	/*
 		Cast slice of bytes to a string (which contains the whole file) and then
@@ -61,13 +65,17 @@ func puzzle1() {
 }
 
 func puzzle2() {
-	fmt.Println("Day 4, puzzle 2.\n\n Count the number of valid passports - those that have all required fields and valid values." +
+	fmt.Println("\nDay 4, puzzle 2.\n\n Count the number of valid passports - those that have all required fields and valid values." +
 		"Continue to treat cid as optional. In your batch file, how many passports are valid?")
 
 	//Read file content in slice of bytes
 	content, err := ioutil.ReadFile("input")
 	if err != nil {
 		log.Fatal(err)
+	}
+	// Remove last newline if present
+	if rune(content[len(content)-1]) == '\n' {
+		content = content[:len(content)-1]
 	}
 
 	/*

@@ -23,6 +23,11 @@ func puzzle1() {
 		log.Fatal(err)
 	}
 
+	// Remove last newline if present
+	if rune(content[len(content)-1]) == '\n' {
+		content = content[:len(content)-1]
+	}
+
 	/*
 		Cast slice of bytes to a string (which contains the whole file) and then
 		use the split function to create a slice using a separator (newline)
@@ -57,6 +62,10 @@ func puzzle2() {
 	content, err := ioutil.ReadFile("input")
 	if err != nil {
 		log.Fatal(err)
+	}
+	// Remove last newline if present
+	if rune(content[len(content)-1]) == '\n' {
+		content = content[:len(content)-1]
 	}
 
 	/*

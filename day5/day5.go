@@ -23,6 +23,10 @@ func puzzle1() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Remove last newline if present
+	if rune(content[len(content)-1]) == '\n' {
+		content = content[:len(content)-1]
+	}
 
 	/*
 		Cast slice of bytes to a string (which contains the whole file) and then
@@ -63,12 +67,16 @@ func puzzle1() {
 }
 
 func puzzle2() {
-	fmt.Println("Day 5, puzzle 2.\n\n What is the ID of your seat?")
+	fmt.Println("\nDay 5, puzzle 2.\n\n What is the ID of your seat?")
 
 	//Read file content in slice of bytes
 	content, err := ioutil.ReadFile("input")
 	if err != nil {
 		log.Fatal(err)
+	}
+	// Remove last newline if present
+	if rune(content[len(content)-1]) == '\n' {
+		content = content[:len(content)-1]
 	}
 
 	/*
