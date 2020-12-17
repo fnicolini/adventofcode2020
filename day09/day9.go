@@ -15,7 +15,7 @@ func main() {
 }
 
 func puzzle1() {
-	fmt.Println("Day 9, puzzle 1.\n\nWhat is the first number that does not have this property?")
+	fmt.Println("Day 10, puzzle 1.\n\nWhat is the first number that does not have this property?")
 
 	//Read file content in slice of bytes
 	content, err := ioutil.ReadFile("input")
@@ -31,7 +31,14 @@ func puzzle1() {
 		Cast slice of bytes to a string (which contains the whole file) and then
 		use the split function to create a slice using a separator (newline)
 	*/
-	numbers := strings.Split(string(content), "\n")
+	strings := strings.Split(string(content), "\n")
+	numbers := make([]int, len(strings))
+	for i, s := range strings {
+		numbers[i], err = strconv.Atoi(s)
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}
 
 	for i := 25; i < len(numbers); i++ {
 		if !findAddends(numbers[i-25:i], numbers[i]) {
@@ -39,34 +46,16 @@ func puzzle1() {
 			return
 		}
 	}
-
 }
 
-func findAddends(x []string, n string) bool {
-
+func findAddends(x []int, n int) bool {
 	for i, a := range x {
 		for _, b := range x[i+1:] {
-			x, err := strconv.Atoi(a)
-			if err != nil {
-				log.Fatalln(err)
-			}
-
-			y, err := strconv.Atoi(b)
-			if err != nil {
-				log.Fatalln(err)
-			}
-
-			z, err := strconv.Atoi(n)
-			if err != nil {
-				log.Fatalln(err)
-			}
-
-			if (x + y) == z {
+			if (a + b) == n {
 				return true
 			}
 		}
 	}
-
 	return false
 }
 
